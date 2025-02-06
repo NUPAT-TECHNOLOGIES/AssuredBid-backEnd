@@ -1,0 +1,6 @@
+@AssuredBid_HostAddress = http://localhost:5258
+
+GET {{AssuredBid_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
