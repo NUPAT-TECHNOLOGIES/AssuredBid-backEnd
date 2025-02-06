@@ -51,7 +51,7 @@ namespace AssuredBid.Services.UserServices
             {
                 UserId = user.Id,
                 Code = code,
-                ExpirationTime = DateTime.Now.AddMinutes(5)
+                ExpirationTime = DateTime.UtcNow.AddMinutes(5)
             };
 
             _dbContext.Otps.Add(otp);
@@ -121,7 +121,7 @@ namespace AssuredBid.Services.UserServices
             {
                 Email = dto.Email,
                 Otp = code,
-                ExpirationTime = DateTime.Now.AddMinutes(5)
+                ExpirationTime = DateTime.UtcNow.AddMinutes(5) // Use UTC instead of local time
             };
 
             _dbContext.ResetPasswordOtps.Add(otp);
