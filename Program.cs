@@ -18,15 +18,24 @@ namespace AssuredBid
 
             // Add services to the container
             builder.Services.AddControllers();
-
-            // Configure Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Add Database Context
+            // Configure PostgreSQL
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+                options.UseNpgsql(connectionString));
+
+            // Enable CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
 
             // Configure JwtSettings
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
@@ -67,10 +76,11 @@ namespace AssuredBid
 
             app.UseHttpsRedirection();
 
-            // Add Authentication Middleware
-            app.UseAuthentication();
+            // Apply CORS Policy
+            app.UseCors("AllowAll");
 
-            // Add Authorization Middleware
+            // Add Authentication & Authorization Middleware
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // Map controllers

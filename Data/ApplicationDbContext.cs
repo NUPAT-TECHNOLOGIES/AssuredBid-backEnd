@@ -9,6 +9,6 @@ namespace AssuredBid.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Otp> Otps { get; set; }
-        public DbSet<ResetPasswordOtp> ResetPasswordOtps { get; set; } // DbSet for ResetPasswordOtp, as previously added
+        public DbSet<ResetPasswordOtp> ResetPasswordOtps { get; set; } // DbSet for ResetPasswordOtp,
     }
 }
