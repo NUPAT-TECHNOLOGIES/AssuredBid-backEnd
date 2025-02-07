@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AssuredBid</name>
+    </assembly>
+    <members>
+        <member name="M:AssuredBid.Controllers.TenderController.GetTenders(System.Int32,System.String)">
+            <summary>
+            get tenders with limit = number of tenders to generate and stage = tender
+            </summary>
+            <param name="limit"></param>
+            <param name="stage"></param>
+            <returns>The List of TENDERS</returns>
+        </member>
+        <member name="T:AssuredBid.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
