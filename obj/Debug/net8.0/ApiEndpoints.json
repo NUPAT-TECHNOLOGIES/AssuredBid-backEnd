@@ -112,6 +112,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AssuredBid.Controllers.TenderController",
+    "Method": "GetTenders",
+    "RelativePath": "api/Tender/GetTendersWithLimitAndStages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "stage",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AssuredBid.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
