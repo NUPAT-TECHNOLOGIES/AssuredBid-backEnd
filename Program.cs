@@ -5,6 +5,7 @@ using AssuredBid.Services.Iservice;
 using AssuredBid.Services.UserServices;
 using FluentEmail.Core.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
