@@ -311,3 +311,6 @@ C:\Users\HP\Documents\GitHub\AssuredBid\obj\Debug\net8.0\AssuredBid.genruntimeco
 C:\Users\HP\Documents\GitHub\AssuredBid\obj\Debug\net8.0\ref\AssuredBid.dll
 C:\Users\HP\Documents\GitHub\AssuredBid\bin\Debug\net8.0\AssuredBid.xml
 C:\Users\HP\Documents\GitHub\AssuredBid\obj\Debug\net8.0\AssuredBid.xml
+C:\Users\QAZIM\source\repos\botApi\UserAuthApi\AssuredBID\AssuredBid\bin\Debug\net8.0\AssuredBid.xml
+C:\Users\QAZIM\source\repos\botApi\UserAuthApi\AssuredBID\AssuredBid\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\QAZIM\source\repos\botApi\UserAuthApi\AssuredBID\AssuredBid\obj\Debug\net8.0\AssuredBid.xml

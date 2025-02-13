@@ -4,6 +4,69 @@
         <name>AssuredBid</name>
     </assembly>
     <members>
+        <member name="M:AssuredBid.Controllers.RegistrationController.Register(AssuredBid.DTOs.UserRegistrationDto)">
+            <summary>
+            Registers a new user and sends a verification code to their email.
+            </summary>
+            <param name="dto">User registration details.</param>
+            <returns>A confirmation message.</returns>
+            <response code="200">Verification code sent successfully.</response>
+            <response code="400">Invalid registration data.</response>
+        </member>
+        <member name="M:AssuredBid.Controllers.RegistrationController.Verify(AssuredBid.DTOs.VerifyCodeDto)">
+            <summary>
+            Verifies the email using the provided verification code.
+            </summary>
+            <param name="dto">Verification code details.</param>
+            <returns>A confirmation message.</returns>
+            <response code="200">Email verified successfully.</response>
+            <response code="400">Invalid verification data.</response>
+        </member>
+        <member name="M:AssuredBid.Controllers.RegistrationController.CompleteRegistration(AssuredBid.DTOs.CompleteRegistrationDto)">
+            <summary>
+            Completes user registration after email verification.
+            </summary>
+            <param name="dto">User completion details.</param>
+            <returns>A success message.</returns>
+            <response code="200">Registration completed successfully.</response>
+            <response code="400">Invalid completion data.</response>
+        </member>
+        <member name="M:AssuredBid.Controllers.RegistrationController.Login(AssuredBid.DTOs.LoginDto)">
+            <summary>
+            Logs in the user and returns an authentication token.
+            </summary>
+            <param name="dto">Login details.</param>
+            <returns>JWT token.</returns>
+            <response code="200">Login successful.</response>
+            <response code="400">Invalid login data.</response>
+        </member>
+        <member name="M:AssuredBid.Controllers.RegistrationController.SendResetPasswordOtp(AssuredBid.DTOs.SendResetPasswordOtpDto)">
+            <summary>
+            Sends an OTP to the user's email for password reset.
+            </summary>
+            <param name="dto">User email details.</param>
+            <returns>A confirmation message.</returns>
+            <response code="200">OTP sent successfully.</response>
+            <response code="400">Invalid reset password data.</response>
+        </member>
+        <member name="M:AssuredBid.Controllers.RegistrationController.VerifyResetOtp(AssuredBid.DTOs.VerifyResetPasswordOtpDto)">
+            <summary>
+            Verifies the OTP for password reset.
+            </summary>
+            <param name="dto">OTP verification details.</param>
+            <returns>A success message.</returns>
+            <response code="200">OTP verified successfully.</response>
+            <response code="400">Invalid OTP verification data.</response>
+        </member>
+        <member name="M:AssuredBid.Controllers.RegistrationController.ResetPassword(AssuredBid.DTOs.ResetPasswordDto)">
+            <summary>
+            Resets the user's password after OTP verification.
+            </summary>
+            <param name="dto">New password details.</param>
+            <returns>A success message.</returns>
+            <response code="200">Password reset successfully.</response>
+            <response code="400">Invalid password reset data.</response>
+        </member>
         <member name="M:AssuredBid.Controllers.TenderController.GetTenders(System.Int32,System.String)">
             <summary>
             get tenders with limit = number of tenders to generate and stage = tender
