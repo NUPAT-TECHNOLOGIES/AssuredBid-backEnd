@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AssuredBid")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae61eee6dedbd7c26c457ed5c969cc7f8208d554")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a4196b8012f83624cf03b8d3dc3b3d2fd3cba7b")]
 [assembly: System.Reflection.AssemblyProductAttribute("AssuredBid")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AssuredBid")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
