@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.IO;
+using AssuredBid.Models;
 
 namespace AssuredBid.Controllers
 {
@@ -10,11 +11,11 @@ namespace AssuredBid.Controllers
     [ApiController]
     public class TenderController : ControllerBase
     {
-        private readonly ITenderService tender;
+        private readonly ITenderService tenderService;
 
         public TenderController(ITenderService tender)
         {
-            this.tender = tender;
+            this.tenderService = tender;
         }
 
         /// <summary>
@@ -28,8 +29,17 @@ namespace AssuredBid.Controllers
         
         public async Task<IActionResult> GetTenders(int limit, string stage)
         {
-            var response = await tender.GetTendersByLimitsAndStages(limit, stage);
+            var response = await tenderService.GetTendersByLimitsAndStages(limit, stage);
             return Ok(response);
         }
+
+        [HttpPost("CreateNewTender")]
+
+        public async Task<IActionResult> CreateNewTenders([FromBody] Tenders tender)
+        {
+            var newTender = await 
+
+        }
+
     }
 }
