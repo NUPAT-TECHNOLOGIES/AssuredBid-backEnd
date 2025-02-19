@@ -162,5 +162,17 @@ namespace AssuredBid.Services.UserServices
         {
             return HashPassword(password) == hashedPassword;
         }
+
+        public void Logout(string token)
+        {
+            var blacklistedToken = new BlacklistedToken
+            {
+                Token = token,
+                Expiration = _jwtService.GetTokenExpiration(token)
+            };
+
+            _dbContext.BlacklistedTokens.Add(blacklistedToken);
+            _dbContext.SaveChanges();
+        }
     }
 }

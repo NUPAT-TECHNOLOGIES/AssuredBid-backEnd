@@ -1,14 +1,18 @@
 ﻿using AssuredBid.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AssuredBid.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Otp> Otps { get; set; }
-        public DbSet<ResetPasswordOtp> ResetPasswordOtps { get; set; } // DbSet for ResetPasswordOtp,
+        public DbSet<ResetPasswordOtp> ResetPasswordOtps { get; set; }
+        public DbSet<BlacklistedToken> BlacklistedTokens { get; set; }
     }
 }

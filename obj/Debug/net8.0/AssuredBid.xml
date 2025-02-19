@@ -4,6 +4,41 @@
         <name>AssuredBid</name>
     </assembly>
     <members>
+        <member name="M:AssuredBid.Controllers.AdminController.Register(AssuredBid.Models.RegisterModel)">
+            <summary>
+            Registers an admin and sends a verification token.
+            </summary>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.VerifyAdmin(AssuredBid.DTOs.VerifyAdminDto)">
+            <summary>
+            Verifies the admin with the token and finalizes registration.
+            </summary>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.Login(AssuredBid.Models.LoginModel)">
+            <summary>
+            Logs in an admin.
+            </summary>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.Logout">
+            <summary>
+            Logs out the admin.
+            </summary>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.SendResetPasswordToken(AssuredBid.AdminDto.SendResetPasswordDto)">
+            <summary>
+            Sends a reset password token to the admin's email.
+            </summary>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.VerifyResetToken(AssuredBid.AdminDto.VerifyResetTokenDto)">
+            <summary>
+            Verifies the token before allowing password reset.
+            </summary>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.SetNewPassword(AssuredBid.AdminDto.SetNewPasswordDto)">
+            <summary>
+            Allows setting a new password only if the token was verified.
+            </summary>
+        </member>
         <member name="M:AssuredBid.Controllers.RegistrationController.Register(AssuredBid.DTOs.UserRegistrationDto)">
             <summary>
             Registers a new user and sends a verification code to their email.
@@ -67,6 +102,15 @@
             <response code="200">Password reset successfully.</response>
             <response code="400">Invalid password reset data.</response>
         </member>
+        <member name="M:AssuredBid.Controllers.RegistrationController.Logout">
+            <summary>
+            Logs out the user by blacklisting the current JWT token.
+            </summary>
+            <returns>A confirmation message.</returns>
+            <response code="200">Logout successful.</response>
+            <response code="400">No token provided.</response>
+            <response code="401">Token is invalid or already blacklisted.</response>
+        </member>
         <member name="M:AssuredBid.Controllers.TenderController.GetTenders(System.Int32,System.String)">
             <summary>
             get tenders with limit = number of tenders to generate and stage = tender
@@ -85,6 +129,54 @@
             <inheritdoc />
         </member>
         <member name="M:AssuredBid.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:AssuredBid.Migrations.BlacklistedTokenTable">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.BlacklistedTokenTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.BlacklistedTokenTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.BlacklistedTokenTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:AssuredBid.Migrations.AddUser">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.AddUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.AddUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.AddUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:AssuredBid.Migrations.RemoveRolesColumn">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.RemoveRolesColumn.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.RemoveRolesColumn.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.RemoveRolesColumn.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:AssuredBid.Migrations.Adminreg">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.Adminreg.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.Adminreg.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.Adminreg.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

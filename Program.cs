@@ -1,4 +1,4 @@
-using AssuredBid.Data;
+﻿using AssuredBid.Data;
 using AssuredBid.Models;
 using AssuredBid.Services;
 using AssuredBid.Services.Iservice;
@@ -23,6 +23,8 @@ namespace AssuredBid
             // Add services to the container
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+
+            // Configure Swagger
             builder.Services.AddSwaggerGen(opt =>
             {
                 opt.SwaggerDoc("v1", new OpenApiInfo
@@ -30,16 +32,14 @@ namespace AssuredBid
                     Title = "AssuredBid.API",
                     Version = "v1",
                     Description = "AssuredBid API that Generates tenders",
-                    
                 });
 
-
-                // XML DOCUMENTATION
+                // Enable XML Documentation
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 opt.IncludeXmlComments(xmlPath);
 
-                //Enable Jwt Authorization in Swagger
+                // Enable JWT Authentication in Swagger
                 opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
@@ -47,7 +47,7 @@ namespace AssuredBid
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-                    Description = "Enter 'Bearer' [space] and your valid token in the text input below. \r\n\r\nExample: \"Bearer eyJhnbGciOrNwi78gGhiLLiUjo9A8dXCVBk9\""
+                    Description = "Enter 'Bearer' [space] and your valid token.\r\nExample: \"Bearer eyJhnbGciOrNwi78g...\""
                 });
 
                 opt.AddSecurityRequirement(new OpenApiSecurityRequirement()
@@ -70,6 +70,11 @@ namespace AssuredBid
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(connectionString));
+
+            // ✅ Add Identity Services (Fixes the 500 Error)
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             // Enable CORS
             builder.Services.AddCors(options =>
@@ -110,8 +115,10 @@ namespace AssuredBid
                 };
             });
 
+            // Register Tender Service
             builder.Services.AddTransient<ITenderService, TenderService>();
 
+            // Configure HTTP Client
             builder.Services.AddHttpClient("Assured_bid", options =>
             {
                 options.BaseAddress = new Uri("https://www.find-tender.service.gov.uk/api/1.0/");
@@ -119,7 +126,7 @@ namespace AssuredBid
 
             var app = builder.Build();
 
-            // Enable Swagger for both Local and Render
+            // Enable Swagger for both Local and Production
             app.UseSwagger();
             app.UseSwaggerUI();
 
@@ -132,11 +139,14 @@ namespace AssuredBid
             // Apply CORS Policy
             app.UseCors("AllowAll");
 
-            // Add Authentication & Authorization Middleware
+            // Enable Middleware
+            app.UseMiddleware<JwtBlacklistMiddleware>();
+
+            // Authentication & Authorization Middleware
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // Map controllers
+            // Map Controllers
             app.MapControllers();
 
             app.Run();

@@ -190,5 +190,34 @@ namespace AssuredBid.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
         }
+
+
+        /// <summary>
+        /// Logs out the user by blacklisting the current JWT token.
+        /// </summary>
+        /// <returns>A confirmation message.</returns>
+        /// <response code="200">Logout successful.</response>
+        /// <response code="400">No token provided.</response>
+        /// <response code="401">Token is invalid or already blacklisted.</response>
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+            if (string.IsNullOrEmpty(token))
+                return BadRequest("No token provided.");
+
+            try
+            {
+                _registrationService.Logout(token);
+                return Ok("Logged out successfully.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+
     }
 }
