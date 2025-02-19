@@ -1,5 +1,111 @@
 [
   {
+    "ContainingType": "AssuredBid.Controllers.AdminController",
+    "Method": "Login",
+    "RelativePath": "api/Admin/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "AssuredBid.Models.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.AdminController",
+    "Method": "Logout",
+    "RelativePath": "api/Admin/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.AdminController",
+    "Method": "Register",
+    "RelativePath": "api/Admin/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "AssuredBid.Models.RegisterModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.AdminController",
+    "Method": "SendResetPasswordToken",
+    "RelativePath": "api/Admin/send-reset-password-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "AssuredBid.AdminDto.SendResetPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.AdminController",
+    "Method": "SetNewPassword",
+    "RelativePath": "api/Admin/set-new-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "AssuredBid.AdminDto.SetNewPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.AdminController",
+    "Method": "VerifyAdmin",
+    "RelativePath": "api/Admin/verify-admin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "AssuredBid.DTOs.VerifyAdminDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.AdminController",
+    "Method": "VerifyResetToken",
+    "RelativePath": "api/Admin/verify-reset-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "AssuredBid.AdminDto.VerifyResetTokenDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AssuredBid.Controllers.RegistrationController",
     "Method": "CompleteRegistration",
     "RelativePath": "api/Registration/complete-registration",
@@ -29,6 +135,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.RegistrationController",
+    "Method": "Logout",
+    "RelativePath": "api/Registration/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -113,6 +229,64 @@
   },
   {
     "ContainingType": "AssuredBid.Controllers.TenderController",
+    "Method": "CreateNewTenders",
+    "RelativePath": "api/Tender/CreateNewTender",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tender",
+        "Type": "AssuredBid.Models.Tenders",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.TenderController",
+    "Method": "DeleteTender",
+    "RelativePath": "api/Tender/Delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.TenderController",
+    "Method": "GetAllTenders",
+    "RelativePath": "api/Tender/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.TenderController",
+    "Method": "GetTenderById",
+    "RelativePath": "api/Tender/GetTenderById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.TenderController",
     "Method": "GetTenders",
     "RelativePath": "api/Tender/GetTendersWithLimitAndStages",
     "HttpMethod": "GET",
@@ -128,6 +302,27 @@
         "Name": "stage",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssuredBid.Controllers.TenderController",
+    "Method": "UpdateTender",
+    "RelativePath": "api/Tender/Update/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "tender",
+        "Type": "AssuredBid.Models.Tenders",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

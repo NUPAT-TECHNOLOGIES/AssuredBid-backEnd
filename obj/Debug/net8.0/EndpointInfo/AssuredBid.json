@@ -6,12 +6,219 @@
     "version": "v1"
   },
   "paths": {
+    "/api/Admin/register": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Registers an admin and sends a verification token.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/verify-admin": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Verifies the admin with the token and finalizes registration.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyAdminDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyAdminDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyAdminDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/login": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Logs in an admin.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/logout": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Logs out the admin.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/send-reset-password-token": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Sends a reset password token to the admin's email.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendResetPasswordDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendResetPasswordDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendResetPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/verify-reset-token": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Verifies the token before allowing password reset.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyResetTokenDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyResetTokenDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyResetTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/set-new-password": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Allows setting a new password only if the token was verified.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetNewPasswordDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetNewPasswordDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetNewPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Registration/register": {
       "post": {
         "tags": [
           "Registration"
         ],
+        "summary": "Registers a new user and sends a verification code to their email.",
         "requestBody": {
+          "description": "User registration details.",
           "content": {
             "application/json": {
               "schema": {
@@ -32,7 +239,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Verification code sent successfully."
+          },
+          "400": {
+            "description": "Invalid registration data."
           }
         }
       }
@@ -42,7 +252,9 @@
         "tags": [
           "Registration"
         ],
+        "summary": "Verifies the email using the provided verification code.",
         "requestBody": {
+          "description": "Verification code details.",
           "content": {
             "application/json": {
               "schema": {
@@ -63,7 +275,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Email verified successfully."
+          },
+          "400": {
+            "description": "Invalid verification data."
           }
         }
       }
@@ -73,7 +288,9 @@
         "tags": [
           "Registration"
         ],
+        "summary": "Completes user registration after email verification.",
         "requestBody": {
+          "description": "User completion details.",
           "content": {
             "application/json": {
               "schema": {
@@ -94,7 +311,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Registration completed successfully."
+          },
+          "400": {
+            "description": "Invalid completion data."
           }
         }
       }
@@ -104,7 +324,9 @@
         "tags": [
           "Registration"
         ],
+        "summary": "Logs in the user and returns an authentication token.",
         "requestBody": {
+          "description": "Login details.",
           "content": {
             "application/json": {
               "schema": {
@@ -125,7 +347,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Login successful."
+          },
+          "400": {
+            "description": "Invalid login data."
           }
         }
       }
@@ -135,7 +360,9 @@
         "tags": [
           "Registration"
         ],
+        "summary": "Sends an OTP to the user's email for password reset.",
         "requestBody": {
+          "description": "User email details.",
           "content": {
             "application/json": {
               "schema": {
@@ -156,7 +383,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OTP sent successfully."
+          },
+          "400": {
+            "description": "Invalid reset password data."
           }
         }
       }
@@ -166,7 +396,9 @@
         "tags": [
           "Registration"
         ],
+        "summary": "Verifies the OTP for password reset.",
         "requestBody": {
+          "description": "OTP verification details.",
           "content": {
             "application/json": {
               "schema": {
@@ -187,7 +419,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OTP verified successfully."
+          },
+          "400": {
+            "description": "Invalid OTP verification data."
           }
         }
       }
@@ -197,7 +432,9 @@
         "tags": [
           "Registration"
         ],
+        "summary": "Resets the user's password after OTP verification.",
         "requestBody": {
+          "description": "New password details.",
           "content": {
             "application/json": {
               "schema": {
@@ -218,7 +455,29 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Password reset successfully."
+          },
+          "400": {
+            "description": "Invalid password reset data."
+          }
+        }
+      }
+    },
+    "/api/Registration/logout": {
+      "post": {
+        "tags": [
+          "Registration"
+        ],
+        "summary": "Logs out the user by blacklisting the current JWT token.",
+        "responses": {
+          "200": {
+            "description": "Logout successful."
+          },
+          "400": {
+            "description": "No token provided."
+          },
+          "401": {
+            "description": "Token is invalid or already blacklisted."
           }
         }
       }
@@ -228,7 +487,7 @@
         "tags": [
           "Tender"
         ],
-        "summary": "get tenders with limit = any number and stage = tender",
+        "summary": "get tenders with limit = number of tenders to generate and stage = tender",
         "parameters": [
           {
             "name": "limit",
@@ -248,6 +507,146 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tender/CreateNewTender": {
+      "post": {
+        "tags": [
+          "Tender"
+        ],
+        "summary": "This Endpoint is used to create new tenders",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tenders"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tenders"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tenders"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tender/GetTenderById": {
+      "get": {
+        "tags": [
+          "Tender"
+        ],
+        "summary": "This Enpoint is used to get tender by its Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tender/Update/{id}": {
+      "put": {
+        "tags": [
+          "Tender"
+        ],
+        "summary": "This Endpoint is used to update tender by its Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tenders"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tenders"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tenders"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tender/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "Tender"
+        ],
+        "summary": "This is used to delete tender by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tender/GetAll": {
+      "get": {
+        "tags": [
+          "Tender"
+        ],
+        "summary": "This Endpoint is used to get all the created tenders",
         "responses": {
           "200": {
             "description": "OK"
@@ -361,6 +760,40 @@
         },
         "additionalProperties": false
       },
+      "LoginModel": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "rememberMe": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterModel": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSuperAdmin": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ResetPasswordDto": {
         "type": "object",
         "properties": {
@@ -369,6 +802,16 @@
             "nullable": true
           },
           "newPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SendResetPasswordDto": {
+        "type": "object",
+        "properties": {
+          "email": {
             "type": "string",
             "nullable": true
           }
@@ -385,6 +828,58 @@
         },
         "additionalProperties": false
       },
+      "SetNewPasswordDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Tenders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenderId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenderTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "budget": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UserRegistrationDto": {
         "type": "object",
         "properties": {
@@ -393,6 +888,20 @@
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerifyAdminDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
             "type": "string",
             "nullable": true
           }
@@ -427,6 +936,20 @@
         },
         "additionalProperties": false
       },
+      "VerifyResetTokenDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "WeatherForecast": {
         "type": "object",
         "properties": {
@@ -454,7 +977,7 @@
     "securitySchemes": {
       "Bearer": {
         "type": "apiKey",
-        "description": "Enter 'Bearer' [space] and your valid token in the text input below. \r\n\r\nExample: \"Bearer eyJhnbGciOrNwi78gGhiLLiUjo9A8dXCVBk9\"",
+        "description": "Enter 'Bearer' [space] and your valid token.\r\nExample: \"Bearer eyJhnbGciOrNwi78g...\"",
         "name": "Authorization",
         "in": "header"
       }

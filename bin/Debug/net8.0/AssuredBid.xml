@@ -119,6 +119,65 @@
             <param name="stage"></param>
             <returns>The List of TENDERS</returns>
         </member>
+        <member name="M:AssuredBid.Controllers.TenderController.CreateNewTenders(AssuredBid.Models.Tenders)">
+            <summary>
+            This Endpoint is used to create new tenders
+            </summary>
+            <param name="tender"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.TenderController.GetTenderById(System.Guid)">
+            <summary>
+            This Enpoint is used to get tender by its Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.TenderController.UpdateTender(System.Guid,AssuredBid.Models.Tenders)">
+            <summary>
+            This Endpoint is used to update tender by its Id
+            </summary>
+            <param name="id"></param>
+            <param name="tender"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.TenderController.DeleteTender(System.Guid)">
+            <summary>
+            This is used to delete tender by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.TenderController.GetAllTenders">
+            <summary>
+            This Endpoint is used to get all the created tenders
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:AssuredBid.DTOs.Metadata.PageIndex">
+            <summary>
+            The current page number
+            </summary>
+            
+        </member>
+        <member name="P:AssuredBid.DTOs.Metadata.PageSize">
+            <summary>
+            The number of items on a page
+            </summary>
+            
+        </member>
+        <member name="P:AssuredBid.DTOs.Metadata.TotalCount">
+            <summary>
+            The total number of items
+            </summary>
+            
+        </member>
+        <member name="P:AssuredBid.DTOs.Metadata.TotalPages">
+            <summary>
+            The total number of pages
+            </summary>
+            
+        </member>
         <member name="T:AssuredBid.Migrations.InitialCreate">
             <inheritdoc />
         </member>

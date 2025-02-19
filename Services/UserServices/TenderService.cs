@@ -1,5 +1,7 @@
-﻿using AssuredBid.Models;
+﻿using AssuredBid.Data;
+using AssuredBid.Models;
 using AssuredBid.Services.Iservice;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace AssuredBid.Services.UserServices
@@ -7,10 +9,40 @@ namespace AssuredBid.Services.UserServices
     public class TenderService : ITenderService
     {
         private readonly IHttpClientFactory httpClientFactory;
-        public TenderService(IHttpClientFactory httpClientFactory)
+        private readonly ApplicationDbContext applicationDbContext;
+        public TenderService(IHttpClientFactory httpClientFactory, ApplicationDbContext applicationDbContext)
         {
             this.httpClientFactory = httpClientFactory;
+            this.applicationDbContext = applicationDbContext;
         }
+
+        public async Task<Tenders> AddTender(Tenders tender)
+        {
+            applicationDbContext.tenders.Add(tender);
+            await applicationDbContext.SaveChangesAsync();
+            return tender;
+        }
+
+        public async Task<bool> DeleteTender(Guid id)
+        {
+            var tender = await applicationDbContext.tenders.FindAsync(id);
+            if (tender == null) return false;
+
+            applicationDbContext.tenders.Remove(tender);
+            await applicationDbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<IEnumerable<Tenders>> GetAllTenders()
+        {
+            return await applicationDbContext.tenders.ToListAsync();
+        }
+
+        public async Task<Tenders> GetTenderById(Guid id)
+        {
+            return await applicationDbContext.tenders.FirstAsync();
+        }
+
         public async Task<Notice> GetTendersByLimitsAndStages(int limit, string stages)
         {
             var verify = httpClientFactory.CreateClient("Assured_bid");
@@ -40,6 +72,13 @@ namespace AssuredBid.Services.UserServices
             {
                 throw;
             }
+        }
+
+        public async Task<Tenders> UpdateTender(Tenders tender)
+        {
+            applicationDbContext.tenders.Update(tender);
+            await applicationDbContext.SaveChangesAsync();
+            return tender;
         }
     }
 }
