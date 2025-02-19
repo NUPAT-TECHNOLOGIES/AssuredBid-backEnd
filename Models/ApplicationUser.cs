@@ -4,6 +4,6 @@ namespace AssuredBid.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public ICollection<string> Roles { get; set; }
+        public bool IsVerified { get; set; } = false; // Default to false
     }
 }
