@@ -2,6 +2,7 @@
 using AssuredBid.Services.Iservice;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace AssuredBid.Controllers
 {
@@ -10,10 +11,11 @@ namespace AssuredBid.Controllers
     public class RegistrationController : ControllerBase
     {
         private readonly IRegistrationService _registrationService;
-
-        public RegistrationController(IRegistrationService registrationService)
+        private readonly ICompanyHouse companyHouse;
+        public RegistrationController(IRegistrationService registrationService, ICompanyHouse companyHouse)
         {
             _registrationService = registrationService;
+            this.companyHouse = companyHouse;
         }
 
         /// <summary>
@@ -216,6 +218,18 @@ namespace AssuredBid.Controllers
             {
                 return BadRequest(new { Message = ex.Message });
             }
+        }
+
+        /// <summary>
+        /// This endpoint is used to get company's profiles through the company number
+        /// </summary>
+        /// <param name="companyNumber"></param>
+        /// <returns></returns>
+        [HttpGet("GetCompanyProfile")]
+        public async Task<IActionResult> GetCompanyProfile(string companyNumber)
+        {
+            var response = await companyHouse.GetCompanyProfile(companyNumber);
+            return Ok(response);
         }
 
 

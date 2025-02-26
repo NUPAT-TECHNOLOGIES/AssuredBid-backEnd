@@ -3,6 +3,7 @@ using System;
 using AssuredBid.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AssuredBid.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250221111927_CreateTenders")]
+    partial class CreateTenders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,43 +112,6 @@ namespace AssuredBid.Migrations
                     b.ToTable("BlacklistedTokens");
                 });
 
-            modelBuilder.Entity("AssuredBid.Models.CreateTenders", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<decimal>("Budget")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Deadline")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TenderId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TenderTitle")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tenders");
-                });
-
             modelBuilder.Entity("AssuredBid.Models.Otp", b =>
                 {
                     b.Property<int>("Id")
@@ -194,6 +160,43 @@ namespace AssuredBid.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ResetPasswordOtps");
+                });
+
+            modelBuilder.Entity("AssuredBid.Models.Tenders", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TenderId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TenderTitle")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tenders");
                 });
 
             modelBuilder.Entity("AssuredBid.Models.User", b =>
@@ -248,46 +251,6 @@ namespace AssuredBid.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("AssuredBid.Models.UsersPage", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("EmailAddress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Fullname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("LastActive")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("AdminUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

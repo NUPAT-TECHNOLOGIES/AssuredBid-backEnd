@@ -211,6 +211,234 @@
         }
       }
     },
+    "/api/Admin/search/{query}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "This Endpoint is used to fetch users in database using fullname or EmailAddress",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersPage"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersPage"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersPage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/{id}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "This Endpoint is used to get user by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersPage"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersPage"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersPage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "This Endpoint is used to Update/edit existing User",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersPage"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersPage"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersPage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "This Enpoint is to delete users using Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "This Endpoint is used to get all the users in the database",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersPage"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersPage"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersPage"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "This Endpoint is used to create new user",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Registration/register": {
       "post": {
         "tags": [
@@ -482,12 +710,67 @@
         }
       }
     },
+    "/api/Registration/GetCompanyProfile": {
+      "get": {
+        "tags": [
+          "Registration"
+        ],
+        "summary": "This endpoint is used to get company's profiles through the company number",
+        "parameters": [
+          {
+            "name": "companyNumber",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Tender/GetTendersWithLimitAndStages": {
       "get": {
         "tags": [
           "Tender"
         ],
         "summary": "get tenders with limit = number of tenders to generate and stage = tender",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "stage",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tender/SendTendersToUsers": {
+      "post": {
+        "tags": [
+          "Tender"
+        ],
+        "summary": "This Endpoint is used to push CreateTenders to the users",
         "parameters": [
           {
             "name": "limit",
@@ -525,17 +808,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Tenders"
+                "$ref": "#/components/schemas/CreateTenderDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Tenders"
+                "$ref": "#/components/schemas/CreateTenderDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Tenders"
+                "$ref": "#/components/schemas/CreateTenderDTO"
               }
             }
           }
@@ -594,17 +877,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Tenders"
+                "$ref": "#/components/schemas/CreateTenders"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Tenders"
+                "$ref": "#/components/schemas/CreateTenders"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Tenders"
+                "$ref": "#/components/schemas/CreateTenders"
               }
             }
           }
@@ -746,6 +1029,78 @@
         },
         "additionalProperties": false
       },
+      "CreateTenderDTO": {
+        "type": "object",
+        "properties": {
+          "tenderId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenderTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "budget": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateTenders": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenderId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenderTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "budget": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginDto": {
         "type": "object",
         "properties": {
@@ -842,44 +1197,6 @@
         },
         "additionalProperties": false
       },
-      "Tenders": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "tenderId": {
-            "type": "string",
-            "nullable": true
-          },
-          "tenderTitle": {
-            "type": "string",
-            "nullable": true
-          },
-          "category": {
-            "type": "string",
-            "nullable": true
-          },
-          "budget": {
-            "type": "number",
-            "format": "double"
-          },
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "deadline": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "UserRegistrationDto": {
         "type": "object",
         "properties": {
@@ -890,6 +1207,86 @@
           "password": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsersDTO": {
+        "type": "object",
+        "properties": {
+          "fullname": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "lastActive": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsersPage": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fullname": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastActive": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

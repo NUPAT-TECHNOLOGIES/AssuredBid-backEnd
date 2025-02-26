@@ -15,7 +15,7 @@ namespace AssuredBid.Helpers
             PageNumber = pageIndex.HasValue ? (pageIndex.Value is 0 ? 1 : pageIndex.Value) : 1;
 
             PageIndex = (pageIndex-- <= 0 ? 0 : pageIndex--) ?? 0;
-            PageSize = 20;
+            PageSize = 15;
             TotalCount = source.Count();
             TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
 

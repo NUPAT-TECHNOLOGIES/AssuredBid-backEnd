@@ -1,8 +1,7 @@
-﻿namespace AssuredBid.Models
+﻿namespace AssuredBid.DTOs
 {
-    public class Tenders
+    public class CreateTenderDTO
     {
-        public Guid Id { get; set; }
         public string TenderId { get; set; }
         public string TenderTitle { get; set; }
         public string Category { get; set; }
