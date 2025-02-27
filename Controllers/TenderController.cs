@@ -20,17 +20,16 @@ namespace AssuredBid.Controllers
         }
 
         /// <summary>
-        /// get tenders with limit = number of tenders to generate and stage = tender
+        /// get tenders with limit = number of tenders to generate
         /// </summary>
         /// <param name="limit"></param>
-        /// <param name="stage"></param>
         /// <returns>The List of TENDERS</returns>
         [HttpGet]
         [Route("GetTendersWithLimitAndStages")]
-        
-        public async Task<IActionResult> GetTenders(int limit, string stage)
+
+        public async Task<IActionResult> GetTenders(int limit)
         {
-            var response = await tenderService.GetTendersByLimitsAndStages(limit, stage);
+            var response = await tenderService.GetTendersByLimits(limit);
             return Ok(response);
         }
 
@@ -40,13 +39,13 @@ namespace AssuredBid.Controllers
         /// <param name="limit"></param>
         /// <param name="stage"></param>
         /// <returns></returns>
-        [HttpPost("SendTendersToUsers")]
+        //[HttpPost("SendTendersToUsers")]
 
-        public async Task<IActionResult> SendTenders(int limit, string stage)
-        {
-            var response = await tenderService.GetTendersByLimitsAndStages(limit, stage);
-            return Ok("The Tenders have been pushed successfully");
-        }
+        //public async Task<IActionResult> SendTenders(int limit, string stage)
+        //{
+        //    var response = await tenderService.GetTendersByLimitsAndStages(limit, stage);
+        //    return Ok("The Tenders have been pushed successfully");
+        //}
 
         /// <summary>
         /// This Endpoint is used to create new tenders

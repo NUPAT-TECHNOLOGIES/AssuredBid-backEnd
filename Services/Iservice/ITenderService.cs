@@ -10,6 +10,6 @@ namespace AssuredBid.Services.Iservice
         Task<CreateTenders> UpdateTender(CreateTenders tender);
         Task<bool> DeleteTender(Guid id);
         Task<IEnumerable<CreateTenders>> GetAllTenders();
-        Task<Notice> GetTendersByLimitsAndStages(int limit, string stages);
+        Task<List<TenderDTO>> GetTendersByLimits(int limit);
     }
 }

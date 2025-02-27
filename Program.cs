@@ -130,9 +130,20 @@ namespace AssuredBid
             // Configure HTTP Client
             builder.Services.AddHttpClient("Assured_bid", options =>
             {
+                options.Timeout = TimeSpan.FromSeconds(30);
                 options.BaseAddress = new Uri("https://www.find-tender.service.gov.uk/api/1.0/");
-                options.BaseAddress = new Uri("https://www.contractsfinder.service.gov.uk/");
-                options.BaseAddress = new Uri("https://api.sell2wales.gov.wales/v1/");
+            });
+
+            builder.Services.AddHttpClient("Assured_bid2", op =>
+            {
+                op.Timeout = TimeSpan.FromSeconds(30);
+                op.BaseAddress = new Uri("https://www.contractsfinder.service.gov.uk/");
+            });
+
+            builder.Services.AddHttpClient("Assured_bid3", op =>
+            {
+                op.Timeout = TimeSpan.FromSeconds(30);
+                op.BaseAddress = new Uri("https://api.sell2wales.gov.wales/v1/");
             });
 
             builder.Services.AddHttpClient("Company_House", options =>

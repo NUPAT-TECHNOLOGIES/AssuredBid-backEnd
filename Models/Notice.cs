@@ -57,6 +57,7 @@
         public List<string>? CoveredBy { get; set; }
         public AwardPeriod? AwardPeriod { get; set; }
         public string? ReviewDetails { get; set; }
+        public TenderPeriod? TenderPeriod { get; set; }
     }
 
     public class LegalBasis
@@ -246,5 +247,10 @@
     {
         public string? Id { get; set; }
         public string? Name { get; set; }
+    }
+
+    public class TenderPeriod
+    {
+        public DateTime? EndDate { get; set; }
     }
 }
