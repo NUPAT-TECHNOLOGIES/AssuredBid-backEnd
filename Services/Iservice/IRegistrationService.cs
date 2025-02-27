@@ -6,7 +6,6 @@ namespace AssuredBid.Services.Iservice
     {
         void Register(UserRegistrationDto dto);
         void Verify(VerifyCodeDto dto);
-        void CompleteRegistration(CompleteRegistrationDto dto);
         string Login(LoginDto dto);
 
         // Password reset functionality

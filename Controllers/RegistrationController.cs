@@ -21,12 +21,7 @@ namespace AssuredBid.Controllers
         /// <summary>
         /// Registers a new user and sends a verification code to their email.
         /// </summary>
-        /// <param name="dto">User registration details.</param>
-        /// <returns>A confirmation message.</returns>
-        /// <response code="200">Verification code sent successfully.</response>
-        /// <response code="400">Invalid registration data.</response>
         [HttpPost("register")]
-       
         public IActionResult Register([FromBody] UserRegistrationDto dto)
         {
             if (dto == null)
@@ -44,14 +39,9 @@ namespace AssuredBid.Controllers
         }
 
         /// <summary>
-        /// Verifies the email using the provided verification code.
+        /// Verifies the user's email using the provided OTP.
         /// </summary>
-        /// <param name="dto">Verification code details.</param>
-        /// <returns>A confirmation message.</returns>
-        /// <response code="200">Email verified successfully.</response>
-        /// <response code="400">Invalid verification data.</response>
         [HttpPost("verify")]
-        
         public IActionResult Verify([FromBody] VerifyCodeDto dto)
         {
             if (dto == null)
@@ -60,7 +50,7 @@ namespace AssuredBid.Controllers
             try
             {
                 _registrationService.Verify(dto);
-                return Ok("Email verified. You can now complete registration.");
+                return Ok("Email verified successfully. Registration is complete.");
             }
             catch (InvalidOperationException ex)
             {
@@ -68,30 +58,7 @@ namespace AssuredBid.Controllers
             }
         }
 
-        /// <summary>
-        /// Completes user registration after email verification.
-        /// </summary>
-        /// <param name="dto">User completion details.</param>
-        /// <returns>A success message.</returns>
-        /// <response code="200">Registration completed successfully.</response>
-        /// <response code="400">Invalid completion data.</response>
-        [HttpPost("complete-registration")]
-        
-        public IActionResult CompleteRegistration([FromBody] CompleteRegistrationDto dto)
-        {
-            if (dto == null)
-                return BadRequest("Invalid completion data.");
 
-            try
-            {
-                _registrationService.CompleteRegistration(dto);
-                return Ok("Registration completed successfully.");
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new { Message = ex.Message });
-            }
-        }
 
         /// <summary>
         /// Logs in the user and returns an authentication token.

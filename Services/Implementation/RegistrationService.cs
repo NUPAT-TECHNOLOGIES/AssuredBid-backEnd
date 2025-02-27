@@ -24,28 +24,28 @@ namespace AssuredBid.Services.UserServices
             if (_dbContext.Users.Any(u => u.Email == dto.Email))
                 throw new InvalidOperationException("Email already registered.");
 
-            var code = new Random().Next(100000, 999999).ToString();
-
             var user = new User
             {
                 Email = dto.Email,
                 PasswordHash = HashPassword(dto.Password),
                 IsVerified = false,
-                FirstName = "",
-                LastName = "",
-                PhoneNumber = "",
-                CompanyName ="",
-                CompanyRegistrationNumber= "",
-                CompanyAddress = "",
-                StreetNumber = "",
-                City = "",
-                Country = "",
-                PostCode = ""
-
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                PhoneNumber = dto.PhoneNumber,
+                CompanyName = dto.CompanyName,
+                CompanyRegistrationNumber = dto.CompanyRegistrationNumber,
+                CompanyAddress = dto.CompanyAddress,
+                StreetNumber = dto.StreetNumber,
+                City = dto.City,
+                Country = dto.Country,
+                PostCode = dto.PostCode
             };
 
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
+
+            // Now send OTP after full details are provided
+            var code = new Random().Next(100000, 999999).ToString();
 
             var otp = new Otp
             {
@@ -60,6 +60,7 @@ namespace AssuredBid.Services.UserServices
             _emailService.SendVerificationCode(dto.Email, code);
         }
 
+
         public void Verify(VerifyCodeDto dto)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Email == dto.Email);
@@ -70,34 +71,15 @@ namespace AssuredBid.Services.UserServices
             if (otp == null || otp.ExpirationTime < DateTime.Now)
                 throw new InvalidOperationException("Invalid or expired OTP.");
 
+            // Mark user as verified
             user.IsVerified = true;
             _dbContext.SaveChanges();
 
+            // Remove OTP after verification
             _dbContext.Otps.Remove(otp);
             _dbContext.SaveChanges();
         }
 
-        public void CompleteRegistration(CompleteRegistrationDto dto)
-        {
-            var user = _dbContext.Users.FirstOrDefault(u => u.Email == dto.Email);
-            if (user == null || !user.IsVerified)
-                throw new InvalidOperationException("User not found or not verified.");
-
-            user.FirstName = dto.FirstName;
-            user.LastName = dto.LastName;
-            user.PhoneNumber = dto.PhoneNumber;
-            user.CompanyName = dto.CompanyName;
-            user.CompanyRegistrationNumber = dto.CompanyRegistrationNumber;
-            user.CompanyAddress = dto.CompanyAddress;
-            user.StreetNumber = dto.StreetNumber;
-            user.City = dto.City;
-            user.Country = dto.Country;
-            user.PostCode = dto.PostCode;
-
-
-
-            _dbContext.SaveChanges();
-        }
 
         public string Login(LoginDto dto)
         {

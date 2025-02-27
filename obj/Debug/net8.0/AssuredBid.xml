@@ -85,28 +85,11 @@
             <summary>
             Registers a new user and sends a verification code to their email.
             </summary>
-            <param name="dto">User registration details.</param>
-            <returns>A confirmation message.</returns>
-            <response code="200">Verification code sent successfully.</response>
-            <response code="400">Invalid registration data.</response>
         </member>
         <member name="M:AssuredBid.Controllers.RegistrationController.Verify(AssuredBid.DTOs.VerifyCodeDto)">
             <summary>
-            Verifies the email using the provided verification code.
+            Verifies the user's email using the provided OTP.
             </summary>
-            <param name="dto">Verification code details.</param>
-            <returns>A confirmation message.</returns>
-            <response code="200">Email verified successfully.</response>
-            <response code="400">Invalid verification data.</response>
-        </member>
-        <member name="M:AssuredBid.Controllers.RegistrationController.CompleteRegistration(AssuredBid.DTOs.CompleteRegistrationDto)">
-            <summary>
-            Completes user registration after email verification.
-            </summary>
-            <param name="dto">User completion details.</param>
-            <returns>A success message.</returns>
-            <response code="200">Registration completed successfully.</response>
-            <response code="400">Invalid completion data.</response>
         </member>
         <member name="M:AssuredBid.Controllers.RegistrationController.Login(AssuredBid.DTOs.LoginDto)">
             <summary>
