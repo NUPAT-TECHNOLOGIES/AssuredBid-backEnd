@@ -19,6 +19,7 @@ namespace AssuredBid.Controllers
         private readonly IEmailService _emailService;
         private readonly IRegistrationService _registrationService;
         private readonly IJwtService _jwtService;
+        private readonly IUserService _userRepository;
 
         // Stores unverified admins temporarily (Email -> (Token, Password, User))
         private static readonly ConcurrentDictionary<string, (string Token, string Password, ApplicationUser User)> _unverifiedAdmins
@@ -42,7 +43,8 @@ namespace AssuredBid.Controllers
             IEmailService emailService,
             RoleManager<IdentityRole> roleManager,
             IRegistrationService registrationService,
-            IJwtService jwtService)
+            IJwtService jwtService,
+            IUserService userRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -50,6 +52,7 @@ namespace AssuredBid.Controllers
             _registrationService = registrationService;
             _jwtService = jwtService;
             _emailService = emailService;
+            _userRepository = userRepository;
         }
 
         /// <summary>
@@ -199,6 +202,82 @@ namespace AssuredBid.Controllers
             _verifiedEmails.TryRemove(dto.Email, out _);
 
             return Ok(new { message = "Password reset successfully." });
+        }
+
+        /// <summary>
+        /// This Endpoint is used to fetch users in database using fullname or EmailAddress
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpGet("search/{query}")]
+        public async Task<ActionResult<IEnumerable<UsersPage>>> SearchUsers(string query)
+        {
+            var result = await _userRepository.SearchUsersAsync(query);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// This Endpoint is used to get user by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UsersPage>> GetUser(Guid id)
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+            if (user == null)
+                return NotFound();
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// This Endpoint is used to get all the users in the database
+        /// </summary>
+        /// <returns>List of Users</returns>
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UsersPage>>> GetUsers()
+        {
+            return Ok(await _userRepository.GetAllUsersAsync());
+        }
+
+        /// <summary>
+        /// This Endpoint is used to create new user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>The created user</returns>
+        [HttpPost]
+        public async Task<ActionResult> CreateUser([FromBody] UsersDTO user)
+        {
+            await _userRepository.AddUserAsync(user);
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// This Endpoint is used to Update/edit existing User
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UsersPage user)
+        {
+            if (id != user.UserId)
+                return BadRequest();
+
+            await _userRepository.UpdateUserAsync(user);
+            return NoContent();
+        }
+
+        /// <summary>
+        /// This Enpoint is to delete users using Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            await _userRepository.DeleteUserAsync(id);
+            return NoContent();
         }
     }
 

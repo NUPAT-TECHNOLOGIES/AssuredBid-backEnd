@@ -39,6 +39,48 @@
             Allows setting a new password only if the token was verified.
             </summary>
         </member>
+        <member name="M:AssuredBid.Controllers.AdminController.SearchUsers(System.String)">
+            <summary>
+            This Endpoint is used to fetch users in database using fullname or EmailAddress
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.GetUser(System.Guid)">
+            <summary>
+            This Endpoint is used to get user by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.GetUsers">
+            <summary>
+            This Endpoint is used to get all the users in the database
+            </summary>
+            <returns>List of Users</returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.CreateUser(AssuredBid.DTOs.UsersDTO)">
+            <summary>
+            This Endpoint is used to create new user
+            </summary>
+            <param name="user"></param>
+            <returns>The created user</returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.UpdateUser(System.Guid,AssuredBid.Models.UsersPage)">
+            <summary>
+            This Endpoint is used to Update/edit existing User
+            </summary>
+            <param name="id"></param>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.AdminController.DeleteUser(System.Guid)">
+            <summary>
+            This Enpoint is to delete users using Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:AssuredBid.Controllers.RegistrationController.Register(AssuredBid.DTOs.UserRegistrationDto)">
             <summary>
             Registers a new user and sends a verification code to their email.
@@ -111,6 +153,13 @@
             <response code="400">No token provided.</response>
             <response code="401">Token is invalid or already blacklisted.</response>
         </member>
+        <member name="M:AssuredBid.Controllers.RegistrationController.GetCompanyProfile(System.String)">
+            <summary>
+            This endpoint is used to get company's profiles through the company number
+            </summary>
+            <param name="companyNumber"></param>
+            <returns></returns>
+        </member>
         <member name="M:AssuredBid.Controllers.TenderController.GetTenders(System.Int32,System.String)">
             <summary>
             get tenders with limit = number of tenders to generate and stage = tender
@@ -119,7 +168,15 @@
             <param name="stage"></param>
             <returns>The List of TENDERS</returns>
         </member>
-        <member name="M:AssuredBid.Controllers.TenderController.CreateNewTenders(AssuredBid.Models.Tenders)">
+        <member name="M:AssuredBid.Controllers.TenderController.SendTenders(System.Int32,System.String)">
+            <summary>
+            This Endpoint is used to push CreateTenders to the users
+            </summary>
+            <param name="limit"></param>
+            <param name="stage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AssuredBid.Controllers.TenderController.CreateNewTenders(AssuredBid.DTOs.CreateTenderDTO)">
             <summary>
             This Endpoint is used to create new tenders
             </summary>
@@ -133,7 +190,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:AssuredBid.Controllers.TenderController.UpdateTender(System.Guid,AssuredBid.Models.Tenders)">
+        <member name="M:AssuredBid.Controllers.TenderController.UpdateTender(System.Guid,AssuredBid.Models.CreateTenders)">
             <summary>
             This Endpoint is used to update tender by its Id
             </summary>
@@ -236,6 +293,30 @@
             <inheritdoc />
         </member>
         <member name="M:AssuredBid.Migrations.Adminreg.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:AssuredBid.Migrations.CreateTenders">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.CreateTenders.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.CreateTenders.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.CreateTenders.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:AssuredBid.Migrations.CreateUser">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.CreateUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.CreateUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:AssuredBid.Migrations.CreateUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>

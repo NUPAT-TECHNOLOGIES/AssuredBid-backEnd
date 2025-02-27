@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.IO;
 using AssuredBid.Models;
+using AssuredBid.DTOs;
 
 namespace AssuredBid.Controllers
 {
@@ -34,16 +35,30 @@ namespace AssuredBid.Controllers
         }
 
         /// <summary>
+        /// This Endpoint is used to push CreateTenders to the users
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="stage"></param>
+        /// <returns></returns>
+        [HttpPost("SendTendersToUsers")]
+
+        public async Task<IActionResult> SendTenders(int limit, string stage)
+        {
+            var response = await tenderService.GetTendersByLimitsAndStages(limit, stage);
+            return Ok("The Tenders have been pushed successfully");
+        }
+
+        /// <summary>
         /// This Endpoint is used to create new tenders
         /// </summary>
         /// <param name="tender"></param>
         /// <returns></returns>
         [HttpPost("CreateNewTender")]
 
-        public async Task<IActionResult> CreateNewTenders([FromBody] Tenders tender)
+        public async Task<IActionResult> CreateNewTenders([FromBody] CreateTenderDTO tender)
         {
             var newTender = await tenderService.AddTender(tender);
-            return CreatedAtAction(nameof(GetTenderById), new { id = newTender.Id }, newTender);
+            return CreatedAtAction(nameof(GetTenderById), newTender);
 
         }
 
@@ -67,7 +82,7 @@ namespace AssuredBid.Controllers
         /// <param name="tender"></param>
         /// <returns></returns>
         [HttpPut("Update/{id}")]
-        public async Task<IActionResult> UpdateTender(Guid id, [FromBody] Tenders tender)
+        public async Task<IActionResult> UpdateTender(Guid id, [FromBody] CreateTenders tender)
         {
             if (id != tender.Id) return BadRequest();
             var updatedTender = await tenderService.UpdateTender(tender);
@@ -95,7 +110,7 @@ namespace AssuredBid.Controllers
         public async Task<IActionResult> GetAllTenders()
         {
             var tenders = await tenderService.GetAllTenders();
-            return Ok();
+            return Ok(tenders);
         }
 
     }

@@ -1,6 +1,9 @@
 ﻿using AssuredBid.Data;
+using AssuredBid.DTOs;
+using AssuredBid.Mappings;
 using AssuredBid.Models;
 using AssuredBid.Services.Iservice;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -10,17 +13,20 @@ namespace AssuredBid.Services.UserServices
     {
         private readonly IHttpClientFactory httpClientFactory;
         private readonly ApplicationDbContext applicationDbContext;
-        public TenderService(IHttpClientFactory httpClientFactory, ApplicationDbContext applicationDbContext)
+        private readonly IMapper mapper;
+        public TenderService(IHttpClientFactory httpClientFactory, ApplicationDbContext applicationDbContext, IMapper mapper)
         {
             this.httpClientFactory = httpClientFactory;
             this.applicationDbContext = applicationDbContext;
+            this.mapper = mapper;
         }
 
-        public async Task<Tenders> AddTender(Tenders tender)
+        public async Task<CreateTenderDTO> AddTender(CreateTenderDTO tenderDto)
         {
+            var tender = mapper.Map<CreateTenders>(tenderDto);
             applicationDbContext.tenders.Add(tender);
             await applicationDbContext.SaveChangesAsync();
-            return tender;
+            return tenderDto;
         }
 
         public async Task<bool> DeleteTender(Guid id)
@@ -33,12 +39,12 @@ namespace AssuredBid.Services.UserServices
             return true;
         }
 
-        public async Task<IEnumerable<Tenders>> GetAllTenders()
+        public async Task<IEnumerable<CreateTenders>> GetAllTenders()
         {
             return await applicationDbContext.tenders.ToListAsync();
         }
 
-        public async Task<Tenders> GetTenderById(Guid id)
+        public async Task<CreateTenders> GetTenderById(Guid id)
         {
             return await applicationDbContext.tenders.FirstAsync();
         }
@@ -74,7 +80,7 @@ namespace AssuredBid.Services.UserServices
             }
         }
 
-        public async Task<Tenders> UpdateTender(Tenders tender)
+        public async Task<CreateTenders> UpdateTender(CreateTenders tender)
         {
             applicationDbContext.tenders.Update(tender);
             await applicationDbContext.SaveChangesAsync();

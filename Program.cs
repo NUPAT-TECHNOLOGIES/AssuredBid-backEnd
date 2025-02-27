@@ -11,6 +11,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using System.Net.Http.Headers;
+using AssuredBid.Mappings;
+using AssuredBid.Services.Implementation;
 
 namespace AssuredBid
 {
@@ -115,13 +118,27 @@ namespace AssuredBid
                 };
             });
 
-            // Register Tender Service
+            //Configure AutoMapper
+            builder.Services.AddAutoMapper(typeof(Map));
+
+
+            // Register Services
             builder.Services.AddTransient<ITenderService, TenderService>();
+            builder.Services.AddTransient<ICompanyHouse, CompanyHouseService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             // Configure HTTP Client
             builder.Services.AddHttpClient("Assured_bid", options =>
             {
                 options.BaseAddress = new Uri("https://www.find-tender.service.gov.uk/api/1.0/");
+                options.BaseAddress = new Uri("https://www.contractsfinder.service.gov.uk/");
+                options.BaseAddress = new Uri("https://api.sell2wales.gov.wales/v1/");
+            });
+
+            builder.Services.AddHttpClient("Company_House", options =>
+            {
+                options.BaseAddress = new Uri("https://api.company-information.service.gov.uk/");
+                options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("ebe61666-f8ff-4cfd-9210-86a5fdeac005");
             });
 
             var app = builder.Build();

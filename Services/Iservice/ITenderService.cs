@@ -1,14 +1,15 @@
-﻿using AssuredBid.Models;
+﻿using AssuredBid.DTOs;
+using AssuredBid.Models;
 
 namespace AssuredBid.Services.Iservice
 {
     public interface ITenderService
     {
-        Task<Tenders> GetTenderById(Guid id);
-        Task<Tenders> AddTender(Tenders tender);
-        Task<Tenders> UpdateTender(Tenders tender);
+        Task<CreateTenders> GetTenderById(Guid id);
+        Task<CreateTenderDTO> AddTender(CreateTenderDTO tender);
+        Task<CreateTenders> UpdateTender(CreateTenders tender);
         Task<bool> DeleteTender(Guid id);
-        Task<IEnumerable<Tenders>> GetAllTenders();
+        Task<IEnumerable<CreateTenders>> GetAllTenders();
         Task<Notice> GetTendersByLimitsAndStages(int limit, string stages);
     }
 }

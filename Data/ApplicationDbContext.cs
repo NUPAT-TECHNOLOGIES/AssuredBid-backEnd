@@ -14,6 +14,7 @@ namespace AssuredBid.Data
         public DbSet<Otp> Otps { get; set; }
         public DbSet<ResetPasswordOtp> ResetPasswordOtps { get; set; }
         public DbSet<BlacklistedToken> BlacklistedTokens { get; set; }
-        public DbSet<Tenders> tenders { get; set; }
+        public DbSet<CreateTenders> tenders { get; set; }
+        public DbSet<UsersPage> AdminUsers {  get; set; }
     }
 }
