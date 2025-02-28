@@ -152,6 +152,12 @@ namespace AssuredBid
                 options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("ebe61666-f8ff-4cfd-9210-86a5fdeac005");
             });
 
+            builder.Services.AddHttpClient("Company_House", options =>
+            {
+                options.BaseAddress = new Uri("https://api-sandbox.company-information.service.gov.uk/");
+                options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("6df87760-2475-49aa-a2d5-cf7173e2f065");
+            });
+
             var app = builder.Build();
 
             // Enable Swagger for both Local and Production
