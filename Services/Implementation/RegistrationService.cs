@@ -24,6 +24,10 @@ namespace AssuredBid.Services.UserServices
             if (_dbContext.Users.Any(u => u.Email == dto.Email))
                 throw new InvalidOperationException("Email already registered.");
 
+            if (_dbContext.Users.Any(u => u.CompanyRegistrationNumber == dto.CompanyRegistrationNumber))
+                throw new InvalidOperationException("Company registration number already exists.");
+
+
             var user = new User
             {
                 Email = dto.Email,
