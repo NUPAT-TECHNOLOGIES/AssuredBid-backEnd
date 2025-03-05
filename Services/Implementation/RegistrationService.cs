@@ -44,7 +44,7 @@ namespace AssuredBid.Services.UserServices
                 Country = dto.Country,
                 PostCode = dto.PostCode
             };
-
+              
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
 

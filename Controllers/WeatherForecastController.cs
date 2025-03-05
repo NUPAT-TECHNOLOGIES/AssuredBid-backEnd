@@ -29,5 +29,21 @@ namespace AssuredBid.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("day/{day}")]
+        public ActionResult<WeatherForecast> GetWeatherByDay(int day)
+        {
+            if (day < 1 || day > 5)
+                return BadRequest("Day must be between 1 and 5.");
+
+            var forecast = new WeatherForecast
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(day)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            };
+
+            return Ok(forecast);
+        }
     }
 }
